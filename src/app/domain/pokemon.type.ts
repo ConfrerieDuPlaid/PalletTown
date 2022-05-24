@@ -4,4 +4,6 @@ export enum PokemonType {
     Electric,
     Grass,
     Wind,
+    Bug,
+    Water,
 }

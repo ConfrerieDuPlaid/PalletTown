@@ -1,9 +1,4 @@
 import {Logger} from "./logger";
 
-export class BattleLogger{
-    constructor(
-        private readonly logger: Logger
-    ){}
-
-
+export interface BattleLogger extends Logger{
 }

@@ -1,25 +1,39 @@
 import {Pokemon} from "./pokemon";
 import {PokemonType} from "./pokemon.type";
-import {BattleLogger} from "../logger/battle.logger";
 import {DateUtils} from "../../utils/date.utils";
+import {BattleLogger} from "../logger/battle.logger";
+
+
+class ConsoleBattleLogger implements BattleLogger {
+  log(data: string): void {
+    console.log(data);
+  }
+}
 
 export class Battle {
+    private logger : BattleLogger = new ConsoleBattleLogger;
+    private turnNumber = 0;
     private currentAttacker: Pokemon;
     private lastAttackDate: Date | null;
     private readonly minimumSecondsBetweenTwoAttacks = 1;
     constructor(
-        private readonly p1: Pokemon,
-        private readonly p2: Pokemon,
-        private readonly logger: BattleLogger
+        readonly p1: Pokemon,
+        readonly p2: Pokemon
     ) {
       this.currentAttacker = this.getFirstAttacker();
       this.lastAttackDate = null;
     }
 
-    start(): void {
+    async start(): Promise<void> {
         while(this.isInProgress()) {
+          try {
             this.nextTurn();
+            await this.sleepUntilNextTurn();
+          } catch (error) {
+            if (error instanceof Error) this.logger.log(error.message)
+          }
         }
+        this.logger.log(`${this.getWinner().name} is the winner !`);
     }
 
     // TODO strategy for first attacker selection
@@ -41,11 +55,14 @@ export class Battle {
     nextTurn(): void {
         this.attackerAttacksDefender();
         this.switchAttackerAndDefender();
+        this.logger.log(`Turn number ${this.turnNumber}`);
+        this.turnNumber += 1;
     }
 
     attackerAttacksDefender(): void | never {
         this.checkDurationSinceLastAttack();
         this.currentAttacker.attacks(this.getDefender());
+        this.logger.log(`${this.currentAttacker.name} attacks ${this.getDefender().name}.`)
         this.updateLastAttackDate();
     }
 
@@ -60,8 +77,8 @@ export class Battle {
     private getSecondsSinceLastAttack(): number {
         if(!this.lastAttackDate) throw new Error("No attacks yet.");
         return DateUtils.getSecondsDifferenceBetweenTwoDates(
-            this.lastAttackDate,
-            DateUtils.now()
+            DateUtils.now(),
+            this.lastAttackDate
         );
     }
 
@@ -69,14 +86,14 @@ export class Battle {
         this.lastAttackDate = DateUtils.now();
     }
 
-    getDefender(): Pokemon {
-        return this.currentAttacker === this.p2
-            ? this.p1
-            : this.p2;
-    }
-
     switchAttackerAndDefender(): void{
         this.currentAttacker = this.getDefender();
+    }
+
+    getDefender(): Pokemon {
+      return this.currentAttacker === this.p2
+        ? this.p1
+        : this.p2;
     }
 
     getWinner(): Pokemon | never {
@@ -89,6 +106,10 @@ export class Battle {
     }
 
     private isInProgress(): boolean {
-        return this.p1.isAlive() && this.p1.isAlive();
+        return this.p1.isAlive() && this.p2.isAlive();
     }
+
+  private async sleepUntilNextTurn(): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, this.minimumSecondsBetweenTwoAttacks * 1_000))
+  }
 }

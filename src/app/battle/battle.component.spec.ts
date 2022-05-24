@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BattleComponent } from './battle.component';
+import {Battle} from "../domain/battle";
+import {Pokemon} from "../domain/pokemon";
+import {BattleLogger} from "../logger/battle.logger";
 
 describe('BattleComponent', () => {
   let component: BattleComponent;
@@ -8,7 +11,8 @@ describe('BattleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BattleComponent ]
+      declarations: [ BattleComponent ],
+      providers: []
     })
     .compileComponents();
   });

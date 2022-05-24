@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Battle} from "../domain/battle";
+import {Pokemon} from "../domain/pokemon";
+import {PokemonType} from "../domain/pokemon.type";
 
 @Component({
   selector: 'app-battle',
@@ -6,12 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit {
+  @Input() battle!: Battle;
 
-  private battle: Battle;
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
+    const pikachu = new Pokemon({
+      name: "Pikachu",
+      maxHp: 89,
+      type: PokemonType.Electric
+    });
+    const pidgey = new Pokemon({
+      name: "Pidgey",
+      maxHp: 100,
+      type: PokemonType.Wind
+    });
+    this.battle = new Battle(
+      pikachu,
+      pidgey
+    );
+    this.battle.start();
   }
 
 }
