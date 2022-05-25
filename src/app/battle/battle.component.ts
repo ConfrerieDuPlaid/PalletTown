@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Battle} from "../domain/battle";
 import {Pokemon} from "../domain/pokemon";
 import {PokemonType} from "../domain/pokemon.type";

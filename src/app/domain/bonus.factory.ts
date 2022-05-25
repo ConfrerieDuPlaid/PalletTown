@@ -13,7 +13,7 @@ export class BonusFactory {
     switch (type) {
       case PokemonType.Ice: return {
         value: 0.5,
-        on: PokemonType.Wind
+        on: PokemonType.Fire
       };
       case PokemonType.Electric: return {
         value: 0.2,

@@ -30,6 +30,8 @@ describe('PokemonStatusCardDuringBattleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PokemonStatusCardDuringBattleComponent);
     component = fixture.componentInstance;
+    component.pokemon = pikachu;
+    fixture.detectChanges();
     fixture.detectChanges();
   });
 
@@ -38,8 +40,6 @@ describe('PokemonStatusCardDuringBattleComponent', () => {
   });
 
   it('should display the name Pikachu when given pikachu', () => {
-    component.pokemon = pikachu;
-    fixture.detectChanges();
     const view = fixture.debugElement.nativeElement;
     expect(view.innerHTML).toContain('Pikachu');
   })
@@ -52,8 +52,6 @@ describe('PokemonStatusCardDuringBattleComponent', () => {
   })
 
   it('should display the hp of Pikachu when it has 89/89 hp', () => {
-    component.pokemon = pikachu;
-    fixture.detectChanges();
     const view = fixture.debugElement.nativeElement;
     expect(view.innerHTML).toContain('89/ 89');
   })

@@ -1,3 +1,3 @@
 export interface Logger {
-    log(data: unknown): void;
+    log(data: unknown): string;
 }

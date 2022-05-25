@@ -2,16 +2,11 @@ import {Pokemon} from "./pokemon";
 import {PokemonType} from "./pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
 import {BattleLogger} from "../logger/battle.logger";
+import {ConsoleBattleLogger} from "../battle/console.battle.logger";
 
-
-class ConsoleBattleLogger implements BattleLogger {
-  log(data: string): void {
-    console.log(data);
-  }
-}
 
 export class Battle {
-    private logger : BattleLogger = new ConsoleBattleLogger;
+    logger : BattleLogger = new ConsoleBattleLogger();
     private turnNumber = 0;
     private currentAttacker: Pokemon;
     private lastAttackDate: Date | null;
@@ -28,6 +23,7 @@ export class Battle {
         while(this.isInProgress()) {
           try {
             this.nextTurn();
+            this.logger.log(this.getDefender());
             await this.sleepUntilNextTurn();
           } catch (error) {
             if (error instanceof Error) this.logger.log(error.message)
@@ -52,14 +48,14 @@ export class Battle {
         return null;
     }
 
-    nextTurn(): void {
+    private nextTurn(): void {
         this.attackerAttacksDefender();
         this.switchAttackerAndDefender();
         this.logger.log(`Turn number ${this.turnNumber}`);
         this.turnNumber += 1;
     }
 
-    attackerAttacksDefender(): void | never {
+    private attackerAttacksDefender(): void | never {
         this.checkDurationSinceLastAttack();
         this.currentAttacker.attacks(this.getDefender());
         this.logger.log(`${this.currentAttacker.name} attacks ${this.getDefender().name}.`)
@@ -86,17 +82,17 @@ export class Battle {
         this.lastAttackDate = DateUtils.now();
     }
 
-    switchAttackerAndDefender(): void{
+    private switchAttackerAndDefender(): void{
         this.currentAttacker = this.getDefender();
     }
 
-    getDefender(): Pokemon {
-      return this.currentAttacker === this.p2
+    private getDefender(): Pokemon {
+       return this.currentAttacker === this.p2
         ? this.p1
         : this.p2;
     }
 
-    getWinner(): Pokemon | never {
+    private getWinner(): Pokemon | never {
         if(this.isInProgress()){
             throw new Error('No winner, battle is not over.');
         }
@@ -109,7 +105,7 @@ export class Battle {
         return this.p1.isAlive() && this.p2.isAlive();
     }
 
-  private async sleepUntilNextTurn(): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, this.minimumSecondsBetweenTwoAttacks * 1_000))
-  }
+    private async sleepUntilNextTurn(): Promise<void> {
+      return new Promise(resolve => setTimeout(resolve, this.minimumSecondsBetweenTwoAttacks * 1_000))
+    }
 }
