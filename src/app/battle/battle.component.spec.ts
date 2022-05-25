@@ -22,7 +22,6 @@ describe('BattleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BattleComponent);
     component = fixture.componentInstance;
-    component.battle.logger = new Mock
     fixture.detectChanges();
   });
 

@@ -2,7 +2,7 @@ import {Pokemon} from "./pokemon";
 import {PokemonType} from "./pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
 import {BattleLogger} from "../logger/battle.logger";
-import {ConsoleBattleLogger} from "../battle/console.battle.logger";
+import {ConsoleBattleLogger} from "../logger/console.battle.logger";
 
 
 export class Battle {
