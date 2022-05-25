@@ -7,7 +7,6 @@ import {ConsoleBattleLogger} from "../logger/console.battle.logger";
 
 export class Battle {
     logger : BattleLogger = new ConsoleBattleLogger();
-    private turnNumber = 0;
     private currentAttacker: Pokemon;
     private lastAttackDate: Date | null;
     private readonly minimumSecondsBetweenTwoAttacks = 1;
@@ -51,8 +50,6 @@ export class Battle {
     private nextTurn(): void {
         this.attackerAttacksDefender();
         this.switchAttackerAndDefender();
-        this.logger.log(`Turn number ${this.turnNumber}`);
-        this.turnNumber += 1;
     }
 
     private attackerAttacksDefender(): void | never {

@@ -32,7 +32,7 @@ export class Pokemon implements PokemonProps {
     }
 
     attacks(target: Pokemon) {
-      let damages = 10;
+      let damages = 20;
       if(this.bonus?.on === target.type)
         damages *= 1 + this.bonus.value;
       target.getDamages(damages)
