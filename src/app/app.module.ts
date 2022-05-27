@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { PokemonStatusCardDuringBattleComponent } from './pokemon-status-card-during-battle/pokemon-status-card-during-battle.component';
 import { BattleComponent } from './battle/battle.component';
 import { BattleLogComponent } from './battle-log/battle-log.component';
+import {BattleService} from "./battle/battle.service";
+import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.component';
 
 @NgModule({
   declarations: [
@@ -13,13 +15,16 @@ import { BattleLogComponent } from './battle-log/battle-log.component';
     BattleComponent,
     PokemonStatusCardDuringBattleComponent,
     BattleComponent,
-    BattleLogComponent
+    BattleLogComponent,
+    PlayPauseBattleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    BattleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

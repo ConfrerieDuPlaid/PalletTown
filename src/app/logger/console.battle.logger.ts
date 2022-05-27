@@ -1,5 +1,5 @@
+import { Pokemon } from "../battle/domain/pokemon";
 import {BattleLogger} from "./battle.logger";
-import {Pokemon} from "../domain/pokemon";
 
 export class ConsoleBattleLogger implements BattleLogger {
   history: string[] = [];

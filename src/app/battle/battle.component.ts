@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Battle} from "../domain/battle";
-import {Pokemon} from "../domain/pokemon";
-import {PokemonType} from "../domain/pokemon.type";
+import {Pokemon} from "./domain/pokemon";
+import {PokemonType} from "./domain/pokemon.type";
+import {BattleService} from "./battle.service";
 
 @Component({
   selector: 'app-battle',
@@ -9,9 +9,11 @@ import {PokemonType} from "../domain/pokemon.type";
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit {
-  @Input() battle!: Battle;
 
-  constructor() {}
+
+  constructor(
+    public readonly battleService: BattleService
+  ) {}
 
   ngOnInit(): void {
     const pikachu = new Pokemon({
@@ -24,11 +26,7 @@ export class BattleComponent implements OnInit {
       maxHp: 100,
       type: PokemonType.Wind
     });
-    this.battle = new Battle(
-      pikachu,
-      pidgey
-    );
-    this.battle.start();
+    this.battleService.init(pikachu, pidgey);
   }
 
 }

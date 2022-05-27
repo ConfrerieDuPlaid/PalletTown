@@ -5,6 +5,6 @@ export class DateUtils {
 
     static getSecondsDifferenceBetweenTwoDates(d1: Date, d2: Date): number {
         const milliseconds: number = d1.getTime() - d2.getTime();
-        return milliseconds / 1_000;
+        return Math.abs(milliseconds) / 1_000;
     }
 }

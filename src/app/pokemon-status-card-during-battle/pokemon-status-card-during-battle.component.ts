@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pokemon} from "../domain/pokemon";
-import {PokemonType} from "../domain/pokemon.type";
+import {Pokemon} from "../battle/domain/pokemon";
+import {PokemonType} from "../battle/domain/pokemon.type";
 
 @Component({
   selector: 'app-pokemon-status-card-during-battle',
