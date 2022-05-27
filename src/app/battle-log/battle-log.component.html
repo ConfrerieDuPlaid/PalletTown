@@ -1,4 +1,5 @@
-<p *ngIf="winner">{{winner.name}} wins !</p>
 <ul>
+  <li *ngIf="winner">{{winner.name}} wins !</li>
+  <li *ngIf="startDate">Battle starts at {{startDate | date:'medium'}}</li>
   <li *ngFor="let log of history">{{log}}</li>
 </ul>

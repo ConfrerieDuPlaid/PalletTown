@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BattleComponent } from './battle.component';
 import {Battle} from "./domain/battle";
 import {Pokemon} from "./domain/pokemon";
-import {BattleLogger} from "../logger/battle.logger";
+import {BattleLogger} from "../battle-log/logger/battle.logger";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('BattleComponent', () => {

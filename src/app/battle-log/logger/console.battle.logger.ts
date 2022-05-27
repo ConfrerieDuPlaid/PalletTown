@@ -1,7 +1,8 @@
-import { Pokemon } from "../battle/domain/pokemon";
+import { Pokemon } from "../../battle/domain/pokemon";
 import {BattleLogger} from "./battle.logger";
 
 export class ConsoleBattleLogger implements BattleLogger {
+  startDate: Date|null = null;
   history: string[] = [];
   log(data: string|Pokemon): string {
     const msg = data instanceof Pokemon
@@ -10,5 +11,10 @@ export class ConsoleBattleLogger implements BattleLogger {
     console.log(msg);
     this.history.push(msg);
     return msg;
+  }
+
+  logBattleBegins(): void {
+    if(this.startDate === null)
+      this.startDate = new Date();
   }
 }

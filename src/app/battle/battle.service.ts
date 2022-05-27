@@ -1,6 +1,6 @@
 import {Injectable, Input} from '@angular/core';
-import {BattleLogger} from "../logger/battle.logger";
-import {ConsoleBattleLogger} from "../logger/console.battle.logger";
+import {BattleLogger} from "../battle-log/logger/battle.logger";
+import {ConsoleBattleLogger} from "../battle-log/logger/console.battle.logger";
 import {Pokemon} from "./domain/pokemon";
 import {PokemonType} from "./domain/pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
@@ -64,8 +64,13 @@ export class BattleService {
 
   private async nextTurn(): Promise<void> {
     await this.sleepBeforeTurn();
+    if(this.isTheFirstTurn()) this.logger.logBattleBegins();
     this.attackerAttacksDefender();
     this.switchAttackerAndDefender();
+  }
+
+  private isTheFirstTurn(): Boolean {
+    return this.lastAttackDate === null;
   }
 
   private attackerAttacksDefender(): void | never {

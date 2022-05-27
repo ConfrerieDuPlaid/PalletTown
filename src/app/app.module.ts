@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { BattleComponent } from './battle/battle.component';
 import { BattleLogComponent } from './battle-log/battle-log.component';
 import {BattleService} from "./battle/battle.service";
 import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.
   providers: [
     BattleService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
