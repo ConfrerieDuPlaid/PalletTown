@@ -1,8 +1,8 @@
 <app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon1"></app-pokemon-status-card-during-battle>
 <app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon2"></app-pokemon-status-card-during-battle>
 <app-play-pause-battle
-  (start)="battleService.start()"
-  (pause)="battleService.pause()"
+  (start)="start()"
+  (pause)="pause()"
 ></app-play-pause-battle>
 <app-battle-log
   [history]="battleService.logger.history"

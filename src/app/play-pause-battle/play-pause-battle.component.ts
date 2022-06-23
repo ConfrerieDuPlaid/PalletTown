@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BattleState} from "../battle/battle-state";
 
-enum BattleState {
-  Play = 'play',
-  Pause = 'pause'
-}
+
 
 @Component({
   selector: 'app-play-pause-battle',
@@ -13,7 +11,7 @@ enum BattleState {
 
 export class PlayPauseBattleComponent implements OnInit {
   isInPause = true;
-  icon: string = BattleState.Play;
+  @Input() icon: string = BattleState.Play;
 
   @Output() start = new EventEmitter();
   @Output() pause = new EventEmitter();

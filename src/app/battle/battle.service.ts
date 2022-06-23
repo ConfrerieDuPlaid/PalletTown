@@ -1,9 +1,10 @@
-import {Injectable, Input} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BattleLogger} from "../battle-log/logger/battle.logger";
 import {ConsoleBattleLogger} from "../battle-log/logger/console.battle.logger";
 import {Pokemon} from "./domain/pokemon";
 import {PokemonType} from "./domain/pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class BattleService {
   private currentAttacker!: Pokemon;
   private lastAttackDate: Date | null = null;
   private readonly minimumSecondsBetweenTwoAttacks = 1;
-  isIsPause = true;
 
   constructor() { }
 
@@ -42,28 +42,30 @@ export class BattleService {
     return null;
   }
 
-  async start(): Promise<void> {
-    this.isIsPause = false;
-    while(this.isInProgress()) {
-      try {
-        await this.nextTurn();
-      } catch (error) {
-        if (error instanceof Error) this.logger.log(error.message)
-      }
-    }
+   start(): Observable<string> {
+
+     return new Observable(observer => {
+       const complete = function () {
+         observer.complete();
+         clearInterval(interval);
+       }
+       const interval = setInterval(() => {
+         observer.next('TICK')
+         this.nextTurn();
+         if(!this.isInProgress()) complete()
+       }, this.minimumSecondsBetweenTwoAttacks * 1_000 + 50);
+
+       return () => complete();
+     });
+     //this.logger.log(error.message)
   }
 
   public isInProgress(): boolean {
-    const bothPokemonAreAlive = this.pokemon1.isAlive() && this.pokemon2.isAlive();
-    return bothPokemonAreAlive && !this.isIsPause;
+    return this.pokemon1.isAlive() && this.pokemon2.isAlive();
   }
 
-  public pause() {
-    this.isIsPause = true;
-  }
 
-  private async nextTurn(): Promise<void> {
-    await this.sleepBeforeTurn();
+  private nextTurn(): void{
     if(this.isTheFirstTurn()) this.logger.logBattleBegins();
     this.attackerAttacksDefender();
     this.switchAttackerAndDefender();
@@ -117,9 +119,5 @@ export class BattleService {
     return this.pokemon1.currentHp > this.pokemon2.currentHp
       ? this.pokemon1
       : this.pokemon2;
-  }
-
-  private async sleepBeforeTurn(): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, this.minimumSecondsBetweenTwoAttacks * 1_000))
   }
 }
