@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Pokemon} from "../battle/domain/pokemon";
 import {DatePipe} from "@angular/common";
+import {LogService} from "./logger/log.service";
 
 @Component({
   selector: 'app-battle-log',
@@ -9,10 +10,11 @@ import {DatePipe} from "@angular/common";
 })
 export class BattleLogComponent implements OnInit {
   @Input() winner?: Pokemon;
+  @Input() loser?: Pokemon;
   @Input() startDate : Date|null = null;
   @Input() history: string[] = [];
 
-  constructor() { }
+  constructor(public logService: LogService) { }
 
   ngOnInit(): void {
   }

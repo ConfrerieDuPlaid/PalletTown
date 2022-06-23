@@ -9,6 +9,7 @@ import { BattleLogComponent } from './battle-log/battle-log.component';
 import {BattleService} from "./battle/battle.service";
 import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.component';
 import {DatePipe} from "@angular/common";
+import {LogService} from "./battle-log/logger/log.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {DatePipe} from "@angular/common";
     AppRoutingModule
   ],
   providers: [
-    BattleService
+    BattleService,
+    LogService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

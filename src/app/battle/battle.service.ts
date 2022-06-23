@@ -4,7 +4,8 @@ import {ConsoleBattleLogger} from "../battle-log/logger/console.battle.logger";
 import {Pokemon} from "./domain/pokemon";
 import {PokemonType} from "./domain/pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
-import {Observable} from "rxjs";
+import {interval, map, Observable, takeUntil, takeWhile} from "rxjs";
+import {LogService} from "../battle-log/logger/log.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ export class BattleService {
   pokemon1!: Pokemon;
   pokemon2!: Pokemon;
 
-  logger : BattleLogger = new ConsoleBattleLogger();
   private currentAttacker!: Pokemon;
   private lastAttackDate: Date | null = null;
   private readonly minimumSecondsBetweenTwoAttacks = 1;
 
-  constructor() { }
+  constructor(
+    private logger: LogService
+  ) { }
 
   public init(pokemon1: Pokemon, pokemon2: Pokemon) {
     this.pokemon1 = pokemon1;
@@ -42,21 +44,13 @@ export class BattleService {
     return null;
   }
 
-   start(): Observable<string> {
-
-     return new Observable(observer => {
-       const complete = function () {
-         observer.complete();
-         clearInterval(interval);
-       }
-       const interval = setInterval(() => {
-         observer.next('TICK')
-         this.nextTurn();
-         if(!this.isInProgress()) complete()
-       }, this.minimumSecondsBetweenTwoAttacks * 1_000 + 50);
-
-       return () => complete();
-     });
+   start(): Observable<void> {
+    const millisecondsBetweenTwoAttacks = this.minimumSecondsBetweenTwoAttacks * 1_000 + 50;
+    return interval(millisecondsBetweenTwoAttacks)
+      .pipe(
+        map(()=> this.nextTurn()),
+        takeWhile(()=> this.isInProgress())
+      )
      //this.logger.log(error.message)
   }
 
@@ -69,6 +63,10 @@ export class BattleService {
     if(this.isTheFirstTurn()) this.logger.logBattleBegins();
     this.attackerAttacksDefender();
     this.switchAttackerAndDefender();
+    if(!this.isInProgress()) {
+      this.logger.logWinnerIs(this.getWinner())
+      this.logger.logloserIs(this.getLoser())
+    }
   }
 
   private isTheFirstTurn(): Boolean {
@@ -113,11 +111,16 @@ export class BattleService {
   }
 
   private getWinner(): Pokemon | never {
-    if(this.isInProgress()){
-      throw new Error('No winner, battle is not over.');
-    }
+    if(this.isInProgress()) throw new Error('No winner, battle is not over.');
+
     return this.pokemon1.currentHp > this.pokemon2.currentHp
       ? this.pokemon1
       : this.pokemon2;
+  }
+
+  private getLoser(): Pokemon {
+    return this.pokemon1.equals(this.getWinner())
+      ? this.pokemon2
+      : this.pokemon1;
   }
 }

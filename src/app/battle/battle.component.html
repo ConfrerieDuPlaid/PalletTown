@@ -5,6 +5,8 @@
   (pause)="pause()"
 ></app-play-pause-battle>
 <app-battle-log
-  [history]="battleService.logger.history"
-  [startDate]="battleService.logger.startDate"
+  [winner]="logger.winner"
+  [history]="logger.history"
+  [startDate]="logger.startDate"
+  [loser]="logger.loser"
 ></app-battle-log>

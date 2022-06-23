@@ -44,4 +44,8 @@ export class Pokemon implements PokemonProps {
         ? hpAfterDamages
         : 0;
   }
+
+  equals(pokemon: Pokemon) {
+    return pokemon.name === this.name;
+  }
 }

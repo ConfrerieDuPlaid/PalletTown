@@ -3,6 +3,7 @@ import {Pokemon} from "./domain/pokemon";
 import {PokemonType} from "./domain/pokemon.type";
 import {BattleService} from "./battle.service";
 import {Observable, Subscriber, Subscription} from "rxjs";
+import {LogService} from "../battle-log/logger/log.service";
 
 @Component({
   selector: 'app-battle',
@@ -10,12 +11,13 @@ import {Observable, Subscriber, Subscription} from "rxjs";
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit, OnDestroy {
-  private battle: Observable<string> = new Observable<string>()
+  private battle: Observable<void> = new Observable<void>()
   private subscriber?: Subscription
 
 
   constructor(
-    readonly battleService: BattleService
+    readonly battleService: BattleService,
+    readonly logger: LogService
   ) {}
 
   ngOnInit(): void {

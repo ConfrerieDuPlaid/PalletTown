@@ -17,4 +17,7 @@ export class ConsoleBattleLogger implements BattleLogger {
     if(this.startDate === null)
       this.startDate = new Date();
   }
+
+  logWinnerIs(winner: Pokemon): void {
+  }
 }
