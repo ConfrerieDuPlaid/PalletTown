@@ -1,8 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PokemonStatusCardDuringBattleComponent} from './pokemon-status-card-during-battle.component';
-import {Pokemon} from "../pokemon/pokemon";
-import {PokemonType} from "../pokemon/pokemon.type";
+import {Pokemon} from "../../pokemon/pokemon";
+import {PokemonType} from "../../pokemon/pokemon.type";
 
 describe('PokemonStatusCardDuringBattleComponent', () => {
   let component: PokemonStatusCardDuringBattleComponent;

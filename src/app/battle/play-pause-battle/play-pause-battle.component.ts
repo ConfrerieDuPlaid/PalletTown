@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BattleState} from "../battle/battle-state";
+import {BattleState} from "../battle-state";
 
 
 

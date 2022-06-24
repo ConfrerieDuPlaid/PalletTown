@@ -1,21 +1,14 @@
-import {Pokemon} from "../../pokemon/pokemon";
-import {Logger} from "./logger";
+import { Pokemon } from "../../../pokemon/pokemon";
 import {BattleLogger} from "./battle.logger";
-import {Injectable} from "@angular/core";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LogService implements BattleLogger{
+export class ConsoleBattleLogger implements BattleLogger {
   startDate: Date|null = null;
   history: string[] = [];
-  winner?: Pokemon;
-  loser?: Pokemon;
-
   log(data: string|Pokemon): string {
     const msg = data instanceof Pokemon
       ? `${data.name} : ${data.currentHp} PV`
       : data;
+    console.log(msg);
     this.history.push(msg);
     return msg;
   }
@@ -26,10 +19,5 @@ export class LogService implements BattleLogger{
   }
 
   logWinnerIs(winner: Pokemon): void {
-    this.winner = winner;
-  }
-
-  logloserIs(loser: Pokemon): void {
-    this.loser = loser;
   }
 }

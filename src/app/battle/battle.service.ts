@@ -1,11 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
-import {BattleLogger} from "../battle-log/logger/battle.logger";
-import {ConsoleBattleLogger} from "../battle-log/logger/console.battle.logger";
+import {BattleLogger} from "./battle-log/logger/battle.logger";
+import {ConsoleBattleLogger} from "./battle-log/logger/console.battle.logger";
 import {Pokemon} from "../pokemon/pokemon";
 import {PokemonType} from "../pokemon/pokemon.type";
 import {DateUtils} from "../../utils/date.utils";
 import {interval, map, Observable, takeUntil, takeWhile} from "rxjs";
-import {LogService} from "../battle-log/logger/log.service";
+import {LogService} from "./battle-log/logger/log.service";
 
 export function log() {
   return function (

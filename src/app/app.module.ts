@@ -3,15 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonStatusCardDuringBattleComponent } from './pokemon-status-card-during-battle/pokemon-status-card-during-battle.component';
 import { BattleComponent } from './battle/battle.component';
-import { BattleLogComponent } from './battle-log/battle-log.component';
 import {BattleService} from "./battle/battle.service";
-import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.component';
 import {DatePipe} from "@angular/common";
-import {LogService} from "./battle-log/logger/log.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {RouterModule} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
+import { ChoiceComponent } from './choice/choice.component';
+import { PokemonSelectorComponent } from './choice/pokemon-selector/pokemon-selector.component';
+import {LogService} from "./battle/battle-log/logger/log.service";
+import {PlayPauseBattleComponent} from "./battle/play-pause-battle/play-pause-battle.component";
+import {BattleLogComponent} from "./battle/battle-log/battle-log.component";
+import {PokemonStatusCardDuringBattleComponent} from "./battle/pokemon-status-card-during-battle/pokemon-status-card-during-battle.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,13 +22,16 @@ import {RouterModule} from "@angular/router";
     PokemonStatusCardDuringBattleComponent,
     BattleComponent,
     BattleLogComponent,
-    PlayPauseBattleComponent
+    PlayPauseBattleComponent,
+    ChoiceComponent,
+    PokemonSelectorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     BattleService,
