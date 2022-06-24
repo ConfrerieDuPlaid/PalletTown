@@ -27,8 +27,8 @@ export class BattleComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const p1 = this.pokemonService.getPokemonByName('pikachu');
     const p2 = this.pokemonService.getPokemonByName('pidgey');
-    p1.pipe(combineLatestWith(p2)).subscribe(([first, second])=> {
-      console.log(first, second)
+    p1.pipe(combineLatestWith(p2))
+      .subscribe(([first, second])=> {
       this.battleService.init(first, second);
       this.battle = this.battleService.start();
     })

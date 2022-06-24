@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {BattleLogger} from "../battle-log/logger/battle.logger";
 import {ConsoleBattleLogger} from "../battle-log/logger/console.battle.logger";
 import {Pokemon} from "../pokemon/pokemon";
@@ -7,15 +7,16 @@ import {DateUtils} from "../../utils/date.utils";
 import {interval, map, Observable, takeUntil, takeWhile} from "rxjs";
 import {LogService} from "../battle-log/logger/log.service";
 
-export function log(value: unknown) {
+export function log() {
   return function (
     target: Object,
     key: string | symbol,
     descriptor: PropertyDescriptor
   ) {
+
     const targetMethod = descriptor.value;
-    descriptor.value = function (...args: unknown[]) {
-      return targetMethod.apply(this, args);
+    descriptor.value = function (...args: any[]) {
+      const result = targetMethod.apply(this, args);
     }
   };
 }
@@ -86,12 +87,14 @@ export class BattleService {
     return this.lastAttackDate === null;
   }
 
-  attackerAttacksDefender(): number | never {
+
+
+  @log()
+  attackerAttacksDefender(): void | never {
     this.checkDurationSinceLastAttack();
     const damages = this.currentAttacker.attacks(this.getDefender());
-    this.logger.log(`${this.currentAttacker.name} attacks ${this.getDefender().name}.`)
+    this.logger.log(`${this.currentAttacker.name} attacks and does ${damages} damages.`)
     this.updateLastAttackDate();
-    return damages;
   }
 
   private checkDurationSinceLastAttack(): void | never {
