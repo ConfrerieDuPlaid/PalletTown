@@ -8,7 +8,7 @@ import {PokemonType} from "../pokemon/pokemon.type";
   styleUrls: ['./pokemon-status-card-during-battle.component.scss']
 })
 export class PokemonStatusCardDuringBattleComponent implements OnInit {
-  @Input() public pokemon!: Pokemon
+  @Input() public pokemon = new Pokemon({maxHp: 0, name: "", type: PokemonType.Electric});
   constructor() { }
 
   ngOnInit(): void {

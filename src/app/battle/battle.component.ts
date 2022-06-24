@@ -5,6 +5,7 @@ import {BattleService} from "./battle.service";
 import {combineLatestWith, Observable, Subscription} from "rxjs";
 import {LogService} from "../battle-log/logger/log.service";
 import {PokemonService} from "../pokemon/pokemon.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-battle',
@@ -21,10 +22,14 @@ export class BattleComponent implements OnInit, OnDestroy {
   constructor(
     readonly battleService: BattleService,
     readonly logger: LogService,
-    readonly pokemonService: PokemonService
+    readonly pokemonService: PokemonService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params): void => {
+      console.log(params['pokemon1'], params['pokemon2'])
+    })
     const p1 = this.pokemonService.getPokemonByName('pikachu');
     const p2 = this.pokemonService.getPokemonByName('pidgey');
     p1.pipe(combineLatestWith(p2))

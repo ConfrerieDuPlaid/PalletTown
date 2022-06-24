@@ -1,2 +1,2 @@
-<p [ngClass]="{'dead': !pokemon.isAlive()}">{{pokemon.name}}</p>
-<p [ngClass]="{'dead': !pokemon.isAlive()}">{{pokemon.currentHp}}/ {{pokemon.maxHp}}</p>
+<p [ngClass]="{'dead': !pokemon?.isAlive()}">{{pokemon.name}}</p>
+<p [ngClass]="{'dead': !pokemon?.isAlive()}">{{pokemon.currentHp}}/ {{pokemon.maxHp}}</p>

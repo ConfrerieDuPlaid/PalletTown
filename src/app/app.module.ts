@@ -1,7 +1,7 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonStatusCardDuringBattleComponent } from './pokemon-status-card-during-battle/pokemon-status-card-during-battle.component';
 import { BattleComponent } from './battle/battle.component';
@@ -11,6 +11,7 @@ import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.
 import {DatePipe} from "@angular/common";
 import {LogService} from "./battle-log/logger/log.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     BattleService,
