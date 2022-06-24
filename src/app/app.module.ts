@@ -26,7 +26,8 @@ import {LogService} from "./battle-log/logger/log.service";
   ],
   providers: [
     BattleService,
-    LogService
+    LogService,
+    DatePipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

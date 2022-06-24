@@ -14,7 +14,10 @@ export class BattleLogComponent implements OnInit {
   @Input() startDate : Date|null = null;
   @Input() history: string[] = [];
 
-  constructor(public logService: LogService) { }
+  constructor(
+    public logService: LogService,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
   }

@@ -7,6 +7,19 @@ import {DateUtils} from "../../utils/date.utils";
 import {interval, map, Observable, takeUntil, takeWhile} from "rxjs";
 import {LogService} from "../battle-log/logger/log.service";
 
+export function log(value: unknown) {
+  return function (
+    target: Object,
+    key: string | symbol,
+    descriptor: PropertyDescriptor
+  ) {
+    const targetMethod = descriptor.value;
+    descriptor.value = function (...args: unknown[]) {
+      return targetMethod.apply(this, args);
+    }
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -73,11 +86,12 @@ export class BattleService {
     return this.lastAttackDate === null;
   }
 
-  private attackerAttacksDefender(): void | never {
+  attackerAttacksDefender(): number | never {
     this.checkDurationSinceLastAttack();
-    this.currentAttacker.attacks(this.getDefender());
+    const damages = this.currentAttacker.attacks(this.getDefender());
     this.logger.log(`${this.currentAttacker.name} attacks ${this.getDefender().name}.`)
     this.updateLastAttackDate();
+    return damages;
   }
 
   private checkDurationSinceLastAttack(): void | never {

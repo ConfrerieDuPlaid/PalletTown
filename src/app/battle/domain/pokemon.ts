@@ -31,18 +31,19 @@ export class Pokemon implements PokemonProps {
         return this.currentHp > 0;
     }
 
-    attacks(target: Pokemon) {
+    attacks(target: Pokemon): number {
       let damages = 20;
       if(this.bonus?.on === target.type)
         damages *= 1 + this.bonus.value;
-      target.getDamages(damages)
+      return target.getDamages(damages)
     }
 
-  private getDamages(damages: number) {
+  private getDamages(damages: number): number {
       const hpAfterDamages = this.currentHp -= damages;
       this.currentHp = hpAfterDamages >= 0
         ? hpAfterDamages
         : 0;
+      return damages;
   }
 
   equals(pokemon: Pokemon) {
