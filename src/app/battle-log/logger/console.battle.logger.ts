@@ -1,4 +1,4 @@
-import { Pokemon } from "../../battle/domain/pokemon";
+import { Pokemon } from "../../pokemon/pokemon";
 import {BattleLogger} from "./battle.logger";
 
 export class ConsoleBattleLogger implements BattleLogger {

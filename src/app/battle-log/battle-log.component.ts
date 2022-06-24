@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Pokemon} from "../battle/domain/pokemon";
+import {Pokemon} from "../pokemon/pokemon";
 import {DatePipe} from "@angular/common";
 import {LogService} from "./logger/log.service";
 

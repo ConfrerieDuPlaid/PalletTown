@@ -10,6 +10,7 @@ import {BattleService} from "./battle/battle.service";
 import { PlayPauseBattleComponent } from './play-pause-battle/play-pause-battle.component';
 import {DatePipe} from "@angular/common";
 import {LogService} from "./battle-log/logger/log.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {LogService} from "./battle-log/logger/log.service";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     BattleService,

@@ -1,4 +1,4 @@
-import {Pokemon} from "../../battle/domain/pokemon";
+import {Pokemon} from "../../pokemon/pokemon";
 import {Logger} from "./logger";
 import {BattleLogger} from "./battle.logger";
 import {Injectable} from "@angular/core";

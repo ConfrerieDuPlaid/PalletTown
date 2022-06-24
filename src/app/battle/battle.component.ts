@@ -1,9 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Pokemon} from "./domain/pokemon";
-import {PokemonType} from "./domain/pokemon.type";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Pokemon} from "../pokemon/pokemon";
+import {PokemonType} from "../pokemon/pokemon.type";
 import {BattleService} from "./battle.service";
-import {Observable, Subscriber, Subscription} from "rxjs";
+import {combineLatestWith, Observable, Subscription} from "rxjs";
 import {LogService} from "../battle-log/logger/log.service";
+import {PokemonService} from "../pokemon/pokemon.service";
 
 @Component({
   selector: 'app-battle',
@@ -13,26 +14,25 @@ import {LogService} from "../battle-log/logger/log.service";
 export class BattleComponent implements OnInit, OnDestroy {
   private battle: Observable<void> = new Observable<void>()
   private subscriber?: Subscription
+  private pokemon1: Pokemon = new Pokemon({maxHp: 0, name: "pokemon", type: PokemonType.Electric});
+  private pokemon2: Pokemon = new Pokemon({maxHp: 0, name: "pokemon", type: PokemonType.Electric});
 
 
   constructor(
     readonly battleService: BattleService,
-    readonly logger: LogService
+    readonly logger: LogService,
+    readonly pokemonService: PokemonService
   ) {}
 
   ngOnInit(): void {
-    const pikachu = new Pokemon({
-      name: "Pikachu",
-      maxHp: 40,
-      type: PokemonType.Electric
-    });
-    const pidgey = new Pokemon({
-      name: "Pidgey",
-      maxHp: 30,
-      type: PokemonType.Wind
-    });
-    this.battleService.init(pikachu, pidgey);
-    this.battle = this.battleService.start();
+    const p1 = this.pokemonService.getPokemonByName('pikachu');
+    const p2 = this.pokemonService.getPokemonByName('pidgey');
+    p1.pipe(combineLatestWith(p2)).subscribe(([first, second])=> {
+      console.log(first, second)
+      this.battleService.init(first, second);
+      this.battle = this.battleService.start();
+    })
+
   }
 
   start(): void {

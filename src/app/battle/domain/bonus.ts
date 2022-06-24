@@ -1,4 +1,4 @@
-import {PokemonType} from "./pokemon.type";
+import {PokemonType} from "../../pokemon/pokemon.type";
 
 export interface Bonus {
     value: number;

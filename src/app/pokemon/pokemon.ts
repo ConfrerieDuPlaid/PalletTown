@@ -1,6 +1,6 @@
 import {PokemonType} from "./pokemon.type";
-import {Bonus} from "./bonus";
-import {BonusFactory} from "./bonus.factory";
+import {Bonus} from "../battle/domain/bonus";
+import {BonusFactory} from "../battle/domain/bonus.factory";
 import {Injectable} from "@angular/core";
 
 export interface PokemonProps {
