@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PokedexService} from "../pokedex/pokedex.service";
+import {Pokemon} from "../pokemon/pokemon";
 
 @Component({
   selector: 'app-choice',
@@ -7,14 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChoiceComponent implements OnInit {
 
+  names: string[] = [];
+
   firstFighter = '';
   secondFighter = '';
 
   readyToFight = false;
 
-  constructor() { }
+  constructor(private pokedexService: PokedexService) { }
 
   ngOnInit(): void {
+    this.pokedexService
+      .getPokemons()
+      .subscribe((pokemons) => this.names = pokemons.map(p=>p.name));
     this.updateReadyToFight();
   }
 

@@ -14,6 +14,8 @@ import {PlayPauseBattleComponent} from "./battle/play-pause-battle/play-pause-ba
 import {BattleLogComponent} from "./battle/battle-log/battle-log.component";
 import {PokemonStatusCardDuringBattleComponent} from "./battle/pokemon-status-card-during-battle/pokemon-status-card-during-battle.component";
 import {FormsModule} from "@angular/forms";
+import {PokeApiResponseAdapter} from "./pokemon/pokemon.service";
+import {PokedexService} from "./pokedex/pokedex.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {FormsModule} from "@angular/forms";
   providers: [
     BattleService,
     LogService,
-    DatePipe
+    DatePipe,
+    PokeApiResponseAdapter,
+    PokedexService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

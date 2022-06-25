@@ -3,6 +3,7 @@
 <form novalidate>
   <app-pokemon-selector
     (selectFighter)="setFirstFighter($event)"
+    [pokemons]="names"
     [fieldId]="1"
     [fieldName]="'First fighter'"></app-pokemon-selector>
 
@@ -13,6 +14,7 @@
 
   <app-pokemon-selector
     (selectFighter)="setSecondFighter($event)"
+    [pokemons]="names"
     [fieldId]="2"
     [fieldName]="'Second fighter'"></app-pokemon-selector>
 </form>

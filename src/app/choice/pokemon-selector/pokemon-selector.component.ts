@@ -8,7 +8,7 @@ import {Pokemon} from "../../pokemon/pokemon";
 })
 export class PokemonSelectorComponent implements OnInit {
 
-  pokemons = ['pikachu', 'pidgey', 'charmander']
+  @Input() pokemons = ['pikachu', 'pidgey', 'charmander']
   @Input() fieldName = '';
   @Input() fieldId = 0;
   @Output() selectFighter = new EventEmitter<string>()

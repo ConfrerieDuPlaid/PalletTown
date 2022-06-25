@@ -27,17 +27,19 @@ export class BattleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe((params: Params): void => {
-        const p1 = this.pokemonService.getPokemonByName(params['pokemon1']);
-        const p2 = this.pokemonService.getPokemonByName(params['pokemon2']);
-        p1.pipe(combineLatestWith(p2))
-          .subscribe(([first, second])=> {
-            this.battleService.init(first, second);
-            this.battle = this.battleService.start();
-          })
+    this.route.params.subscribe((params: Params): void => {
+      this.fetchFighters(params['pokemon1'], params['pokemon2'])
     })
+  }
 
+  private fetchFighters(firstFighterName: any, secondFighterName: any) {
+    const p1 = this.pokemonService.getPokemonByName(firstFighterName);
+    const p2 = this.pokemonService.getPokemonByName(secondFighterName);
+    p1.pipe(combineLatestWith(p2))
+      .subscribe(([first, second])=> {
+        this.battleService.init(first, second);
+        this.battle = this.battleService.start();
+      })
   }
 
   start(): void {
@@ -51,6 +53,4 @@ export class BattleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriber?.unsubscribe()
   }
-
-
 }
