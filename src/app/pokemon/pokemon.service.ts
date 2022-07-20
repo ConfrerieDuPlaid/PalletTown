@@ -9,6 +9,7 @@ interface PokeApiPokemonResponse {
   name: string,
   stats: [{ base_stat: number }],
   types: [{type: {name: string}}]
+  sprites: { back_default: string, front_default: string }
 }
 
 export class PokeApiResponseAdapter {
@@ -17,6 +18,8 @@ export class PokeApiResponseAdapter {
       name: res.name,
       type: PokemonType.Electric,
       maxHp: res.stats[0].base_stat,
+      front: res.sprites.front_default,
+      back: res.sprites.back_default,
     })
   }
 }

@@ -32,7 +32,7 @@ export class BattleComponent implements OnInit, OnDestroy {
     })
   }
 
-  private fetchFighters(firstFighterName: any, secondFighterName: any) {
+  private fetchFighters(firstFighterName: string, secondFighterName: string) {
     const p1 = this.pokemonService.getPokemonByName(firstFighterName);
     const p2 = this.pokemonService.getPokemonByName(secondFighterName);
     p1.pipe(combineLatestWith(p2))

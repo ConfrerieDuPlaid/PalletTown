@@ -8,6 +8,8 @@ export interface PokemonProps {
     maxHp: number;
     type: PokemonType,
     bonus?: Bonus
+    front?: string;
+    back?: string;
 }
 
 type PokemonName = string;
@@ -18,14 +20,18 @@ export class Pokemon implements PokemonProps {
     name: PokemonName;
     type: PokemonType;
     bonus?: Bonus
+    front?: string;
+    back?: string;
 
-    constructor(props: PokemonProps) {
+  constructor(props: PokemonProps) {
         this.name = props.name;
         this.maxHp = props.maxHp;
         this.currentHp = props.maxHp;
         this.type = props.type;
         this.bonus = BonusFactory.byType(props.type);
-    }
+        this.front = props.front;
+        this.back = props.back;
+  }
 
     isAlive() {
         return this.currentHp > 0;
