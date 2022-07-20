@@ -15,9 +15,6 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class BattleComponent implements OnInit, OnDestroy {
   private battle: Observable<void> = new Observable<void>()
   private subscriber?: Subscription
-  private pokemon1: Pokemon = new Pokemon({maxHp: 0, name: "", type: PokemonType.Electric});
-  private pokemon2: Pokemon = new Pokemon({maxHp: 0, name: "", type: PokemonType.Electric});
-
 
   constructor(
     readonly battleService: BattleService,

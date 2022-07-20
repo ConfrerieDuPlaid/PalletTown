@@ -30,12 +30,10 @@ export class AddPokemonComponent implements OnInit {
   private initPokemonTypes () {
    this.pokedexService.getPokemonTypes().subscribe(pokeTypes => {
      this.pokemonTypes = pokeTypes
-     console.log(this.pokemonTypes);
    })
   }
 
   addPokemon() {
-    console.log(this.name, this.hp, this.type)
     const newPokemon: Pokemon = new Pokemon({
       name: this.name,
       maxHp: this.hp,
@@ -43,7 +41,7 @@ export class AddPokemonComponent implements OnInit {
     })
     let userPokemonsJSON: string | null = localStorage.getItem('userPokemons')
     if (!userPokemonsJSON) {
-      userPokemonsJSON = JSON.stringify(newPokemon);
+      userPokemonsJSON = JSON.stringify([newPokemon]);
     } else {
       const setPokemons = JSON.parse(userPokemonsJSON)
       setPokemons.push(newPokemon)
