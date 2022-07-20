@@ -1,3 +1,17 @@
 .dead {
   color: red;
 }
+
+
+#nameContainerAndStatus{
+  background-color: #E0E0E0;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  border-top: 3px #404B41 solid;
+  border-bottom: 3px #404B41 solid;
+  border-right: 2px #404B41 solid;
+  border-left: 2px #404B41 solid;
+}

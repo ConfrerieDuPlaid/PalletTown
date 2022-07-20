@@ -1,12 +1,28 @@
-<app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon1"></app-pokemon-status-card-during-battle>
-<app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon2"></app-pokemon-status-card-during-battle>
-<app-play-pause-battle
-  (start)="start()"
-  (pause)="pause()"
-></app-play-pause-battle>
-<app-battle-log
-  [winner]="logger.winner"
-  [history]="logger.history"
-  [startDate]="logger.startDate"
-  [loser]="logger.loser"
-></app-battle-log>
+
+<div id="background">  </div>
+<div id="battleLog">
+  <app-battle-log
+    [winner]="logger.winner"
+    [history]="logger.history"
+    [startDate]="logger.startDate"
+    [loser]="logger.loser"
+  ></app-battle-log>
+</div>
+  <div id="pokemonContainer">
+    <div id="pokemon1">
+      <app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon1"></app-pokemon-status-card-during-battle>
+      <img class="pokemonImage" [src]="this.battleService.pokemon1.front" alt="picture first pokemon">
+    </div>
+    <div id="pokemon2">
+      <img class="pokemonImage" [src]="this.battleService.pokemon2.back" alt="picture second pokemon">
+      <app-pokemon-status-card-during-battle [pokemon]="battleService.pokemon2"></app-pokemon-status-card-during-battle>
+    </div>
+  </div>
+  <div id="playPauseContainer">
+    <app-play-pause-battle
+      (start)="start()"
+      (pause)="pause()"
+    ></app-play-pause-battle>
+  </div>
+
+

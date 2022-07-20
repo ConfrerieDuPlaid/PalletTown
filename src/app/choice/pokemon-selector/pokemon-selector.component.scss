@@ -1,0 +1,11 @@
+fieldset{
+  width: 45vw;
+}
+
+#containerRadioButton{
+  display: flex;
+  flex-direction:row ;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 50px;
+}

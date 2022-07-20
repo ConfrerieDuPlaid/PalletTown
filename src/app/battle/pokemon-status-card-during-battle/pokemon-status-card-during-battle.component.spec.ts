@@ -9,18 +9,18 @@ describe('PokemonStatusCardDuringBattleComponent', () => {
   let fixture: ComponentFixture<PokemonStatusCardDuringBattleComponent>;
 
   const pikachu: Pokemon = new Pokemon({
-    maxHp: 89,
-    type: PokemonType.Electric,
-    name: "Pikachu"
+      maxHp: 89,
+      type: PokemonType.Electric,
+      name: "Pikachu"
   })
 
-  const pidgey: Pokemon = new Pokemon({
-    maxHp: 78,
-    type: PokemonType.Wind,
-    name: "Pidgey"
-  })
+    const pidgey: Pokemon = new Pokemon({
+        maxHp: 78,
+        type: PokemonType.Wind,
+        name: "Pidgey"
+    })
 
-  beforeEach(async () => {
+    beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PokemonStatusCardDuringBattleComponent ]
     })
