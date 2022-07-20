@@ -28,7 +28,7 @@ import {PokedexService} from "./pokedex/pokedex.service";
     PlayPauseBattleComponent,
     ChoiceComponent,
     PokemonSelectorComponent,
-    AddPokemonComponent
+    AddPokemonComponent,
   ],
   imports: [
     BrowserModule,

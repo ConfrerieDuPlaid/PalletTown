@@ -1,5 +1,6 @@
 
 <h1>Choose your fighters</h1>
+
 <form novalidate>
   <div id="containerSelector">
     <app-pokemon-selector
@@ -15,8 +16,13 @@
       [fieldName]="'Second fighter'"></app-pokemon-selector>
   </div>
 
+  <div id="buttonsBox">
+    <a routerLink="/battle/{{firstFighter}}/{{secondFighter}}">
+      <button type="submit" [disabled]="!readyToFight">FIGHT</button>
+    </a>
 
-  <a routerLink="/battle/{{firstFighter}}/{{secondFighter}}">
-    <button type="submit" [disabled]="!readyToFight">FIGHT</button>
-  </a>
+    <a id="add" routerLink="/add">
+      <button>Ajouter un Pokemon</button>
+    </a>
+  </div>
 </form>

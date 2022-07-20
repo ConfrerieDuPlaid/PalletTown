@@ -7,7 +7,9 @@ import {AddPokemonComponent} from "./add-pokemon/add-pokemon.component";
 const routes: Routes = [
   { path: 'add', component: AddPokemonComponent },
   { path: 'choice', component: ChoiceComponent },
-  { path: 'battle/:pokemon1/:pokemon2', component: BattleComponent }
+  { path: 'battle/:pokemon1/:pokemon2', component: BattleComponent },
+  { path: '', component: ChoiceComponent },
+  { path: '**', component: ChoiceComponent }
 ];
 
 @NgModule({
