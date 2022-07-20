@@ -9,7 +9,7 @@ import {Pokemon} from "../pokemon/pokemon";
 })
 export class ChoiceComponent implements OnInit {
 
-  names: string[] = [];
+  pokemons: Pokemon[] = [];
 
   firstFighter = '';
   secondFighter = '';
@@ -21,7 +21,7 @@ export class ChoiceComponent implements OnInit {
   ngOnInit(): void {
     this.pokedexService
       .getPokemons()
-      .subscribe((pokemons) => this.names = pokemons.map(p=>p.name));
+      .subscribe((pokemons) => this.pokemons = pokemons);
     this.updateReadyToFight();
   }
 
