@@ -1,0 +1,6 @@
+
+<div id="nameContainerAndStatus">
+  <span [ngClass]="{'dead': !pokemon.isAlive()}">{{pokemon.name}}</span>
+  <span [ngClass]="{'dead': !pokemon.isAlive()}">{{pokemon.currentHp}}/ {{pokemon.maxHp}}</span>
+</div>
+

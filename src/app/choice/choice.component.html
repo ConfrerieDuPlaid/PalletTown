@@ -1,0 +1,22 @@
+
+<h1>Choose your fighters</h1>
+<form novalidate>
+  <div id="containerSelector">
+    <app-pokemon-selector
+      (selectFighter)="setFirstFighter($event)"
+      [pokemons]="pokemons"
+      [fieldId]="1"
+      [fieldName]="'First fighter'"></app-pokemon-selector>
+
+    <app-pokemon-selector
+      (selectFighter)="setSecondFighter($event)"
+      [pokemons]="pokemons"
+      [fieldId]="2"
+      [fieldName]="'Second fighter'"></app-pokemon-selector>
+  </div>
+
+
+  <a routerLink="/battle/{{firstFighter}}/{{secondFighter}}">
+    <button type="submit" [disabled]="!readyToFight">FIGHT</button>
+  </a>
+</form>

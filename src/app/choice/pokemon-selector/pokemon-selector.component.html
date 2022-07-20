@@ -1,0 +1,12 @@
+<fieldset>
+  <h2>{{fieldName}}</h2>
+  <div id="containerRadioButton">
+    <ng-template ngFor [ngForOf]="pokemons" let-pokemon>
+      <div>
+        <input type="radio" value="{{pokemon.name}}" id="{{pokemon.name}}{{fieldId}}" name="pokemon{{fieldId}}"
+               (change)="onSelectFighter($event)">
+        <label for="{{pokemon.name}}{{fieldId}}" >{{pokemon.name}}</label>
+      </div>
+    </ng-template>
+  </div>
+</fieldset>
