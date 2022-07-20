@@ -1,0 +1,29 @@
+<form (submit)="addPokemon()" novalidate #cardForm="ngForm">
+  <div id="formContainer">
+    <div class="inputLine">
+      <label>Nom</label>
+      <input class="input" name="nom" minlength='3' placeholder="Pikachu" required type="text" [(ngModel)]="name">
+    </div>
+
+    <div class="inputLine">
+      <label>HP</label>
+      <input class="input" name="hp" min="1" max="500" placeholder="90" required  type="number" [(ngModel)]="hp">
+    </div>
+
+    <div class="inputLine">
+      <label>Type</label>
+      <select class="input" required [(ngModel)]="type">
+        <option *ngFor="let pokemon of pokemonTypes" [value]="pokemon.name">{{pokemon.name}}</option>
+      </select>
+    </div>
+
+    <button [hidden]='cardForm.invalid' type='submit'>Ajouter</button>
+
+    <div class="alertMsg" id="errorMsg" *ngIf="okMessage.length > 0">
+      <p>Ok message</p>
+    </div>
+    <div class="alertMsg" id="successMsg" *ngIf="koMessage.length > 0">
+      <p>Ko message</p>
+    </div>
+  </div>
+</form>

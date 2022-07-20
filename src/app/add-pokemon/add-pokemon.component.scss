@@ -1,0 +1,26 @@
+#formContainer {
+  width: 30vh;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.inputLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+select {
+  width: 70%;
+}
+
+input {
+  width: 70%;
+}
+
+label {
+  width: 30%;
+}

@@ -7,3 +7,12 @@ export enum PokemonType {
     Bug,
     Water,
 }
+
+export class PokemonTypeClass {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+}

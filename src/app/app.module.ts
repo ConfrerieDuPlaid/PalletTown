@@ -16,6 +16,7 @@ import {PokemonStatusCardDuringBattleComponent} from "./battle/pokemon-status-ca
 import {FormsModule} from "@angular/forms";
 import {PokeApiResponseAdapter} from "./pokemon/pokemon.service";
 import {PokedexService} from "./pokedex/pokedex.service";
+import { AddPokemonComponent } from './add-pokemon/add-pokemon.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {PokedexService} from "./pokedex/pokedex.service";
     BattleLogComponent,
     PlayPauseBattleComponent,
     ChoiceComponent,
-    PokemonSelectorComponent
+    PokemonSelectorComponent,
+    AddPokemonComponent
   ],
   imports: [
     BrowserModule,
