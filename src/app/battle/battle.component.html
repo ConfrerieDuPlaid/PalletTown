@@ -20,6 +20,7 @@
   </div>
   <div id="playPauseContainer">
     <app-play-pause-battle
+      [disable]="battleService.bothFightersAreAlive()"
       (start)="start()"
       (pause)="pause()"
     ></app-play-pause-battle>

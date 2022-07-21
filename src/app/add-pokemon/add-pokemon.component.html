@@ -12,7 +12,7 @@
 
     <div class="inputLine">
       <label>Type</label>
-      <select class="input" required [(ngModel)]="type">
+      <select class="input" name="type" required [(ngModel)]="type">
         <option *ngFor="let pokemon of pokemonTypes" [value]="pokemon.name">{{pokemon.name}}</option>
       </select>
     </div>

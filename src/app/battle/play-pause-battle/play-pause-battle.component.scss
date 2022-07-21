@@ -11,3 +11,7 @@ button{
   color: rgb(226, 237, 209);
 }
 
+
+button:disabled {
+  background-color: red;
+}

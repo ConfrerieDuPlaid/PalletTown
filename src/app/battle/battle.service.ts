@@ -63,12 +63,12 @@ export class BattleService {
     return interval(millisecondsBetweenTwoAttacks)
       .pipe(
         map(()=> this.nextTurn()),
-        takeWhile(()=> this.isInProgress())
+        takeWhile(()=> this.bothFightersAreAlive())
       )
      //this.logger.log(error.message)
   }
 
-  public isInProgress(): boolean {
+  public bothFightersAreAlive(): boolean {
     return this.pokemon1.isAlive() && this.pokemon2.isAlive();
   }
 
@@ -77,7 +77,7 @@ export class BattleService {
     if(this.isTheFirstTurn()) this.logger.logBattleBegins();
     this.attackerAttacksDefender();
     this.switchAttackerAndDefender();
-    if(!this.isInProgress()) {
+    if(!this.bothFightersAreAlive()) {
       this.logger.logWinnerIs(this.getWinner())
       this.logger.logloserIs(this.getLoser())
     }
@@ -128,7 +128,7 @@ export class BattleService {
   }
 
   private getWinner(): Pokemon | never {
-    if(this.isInProgress()) throw new Error('No winner, battle is not over.');
+    if(this.bothFightersAreAlive()) throw new Error('No winner, battle is not over.');
 
     return this.pokemon1.currentHp > this.pokemon2.currentHp
       ? this.pokemon1

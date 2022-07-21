@@ -40,6 +40,7 @@ export class BattleComponent implements OnInit, OnDestroy {
   }
 
   start(): void {
+    if(!this.battleService.bothFightersAreAlive()) return;
     this.subscriber = this.battle.subscribe();
   }
 
